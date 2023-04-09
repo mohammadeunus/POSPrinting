@@ -7,7 +7,7 @@ namespace POSPrinting
     class Program
     {
         // Method to print the lines of text to the console
-        static void PrintLines(params List<string>[] lists)
+        static void PrintLines(List<string> lines)
         {
             Console.WriteLine(lines.Count);
             foreach (string line in lines)
@@ -15,6 +15,7 @@ namespace POSPrinting
                 Console.WriteLine(line);
             }
         }
+
 
         static void Main(string[] args)
         {
@@ -28,9 +29,11 @@ namespace POSPrinting
             List<string> linesOfComment = Rcomment.SplitCommentIntoLines();
             int commentLineCount = Rcomment.LineSize();
 
-            List<string> linesOfFoodName = new ReceiptPrinter(foodName).SplitCommentIntoLines();
+            ReceiptPrinter OFoodName = new ReceiptPrinter(foodName);
 
-            PrintLines(linesOfComment, linesOfFoodName);
+            List<string> linesOfFoodName =OFoodName.LineAdd(foodName,48/3, commentLineCount);
+             
+            PrintLines(linesOfFoodName);
 
         }
     }

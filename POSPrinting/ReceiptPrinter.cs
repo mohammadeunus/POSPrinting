@@ -12,6 +12,7 @@ namespace POSPrinting
         private byte lineSize;
         private string comment;
         private List<string> lines = new List<string>();
+        private int lineCount = 0;
 
         // Constructor for the ReceiptPrinter class, which takes in the line size and comment data
         public ReceiptPrinter(byte lineSize, string comment)
@@ -20,8 +21,7 @@ namespace POSPrinting
             this.comment = comment;
         }
         public ReceiptPrinter(string comment)
-        {
-            this.lineSize = lineSize;
+        { 
             this.comment = comment;
         }
 
@@ -56,6 +56,31 @@ namespace POSPrinting
             currentLine += new string('_', spaceCount1);
 
             lines.Add(currentLine.Trim());
+
+            lineCount = lines.Count;
+            
+            return lines;
+        }
+
+
+        internal List<string> LineAdd(string sample, int oneThirdOfLineSize, int lineCount)
+        {
+            List<string> lines = new List<string>();
+
+            lines.Add(sample);
+
+            for (int i = 0; i < lineCount - 1; i++)
+            {
+                lines.Add("_");
+            }
+            Console.WriteLine(lines.Count);
+
+            for (int i = 0; i < lines.Count; i++)
+            {
+                int spaceCount = oneThirdOfLineSize - lines[i].Length;
+                lines[i] += new string('_', spaceCount);
+            }
+
 
             return lines;
         }
