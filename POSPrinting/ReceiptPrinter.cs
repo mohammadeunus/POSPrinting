@@ -11,6 +11,7 @@ namespace POSPrinting
         // Define class-level fields to store line size and comment data
         private byte lineSize;
         private string comment;
+        private List<string> lines = new List<string>();
 
         // Constructor for the ReceiptPrinter class, which takes in the line size and comment data
         public ReceiptPrinter(byte lineSize, string comment)
@@ -18,6 +19,12 @@ namespace POSPrinting
             this.lineSize = lineSize;
             this.comment = comment;
         }
+        public ReceiptPrinter(string comment)
+        {
+            this.lineSize = lineSize;
+            this.comment = comment;
+        }
+
 
         // Method to split the comment into lines that fit within the specified line size
         public List<string> SplitCommentIntoLines()
@@ -26,7 +33,6 @@ namespace POSPrinting
 
             byte oneThirdOfLineSize = (byte)(lineSize / 3);
 
-            List<string> lines = new List<string>();
 
             string currentLine = string.Empty;
 
@@ -53,6 +59,12 @@ namespace POSPrinting
 
             return lines;
         }
+
+        public int LineSize()
+        {
+            return lines.Count;
+        }
+
 
     }
 }
