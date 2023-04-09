@@ -46,14 +46,14 @@ namespace POSPrinting
                 {
 
                     int spaceCount = oneThirdOfLineSize - currentLine.Length;
-                    currentLine += new string('_', spaceCount);
+                    currentLine += new string(' ', spaceCount);
                     lines.Add(currentLine);
 
                     currentLine = commentArray[i] + " ";
                 }
             }
             int spaceCount1 = oneThirdOfLineSize - currentLine.Length;
-            currentLine += new string('_', spaceCount1);
+            currentLine += new string(' ', spaceCount1);
 
             lines.Add(currentLine.Trim());
 
@@ -61,7 +61,7 @@ namespace POSPrinting
             
             return lines;
         }
-
+ 
 
         internal List<string> LineAdd(string sample, int oneThirdOfLineSize, int lineCount)
         {
@@ -71,16 +71,14 @@ namespace POSPrinting
 
             for (int i = 0; i < lineCount - 1; i++)
             {
-                lines.Add("_");
-            }
-            Console.WriteLine(lines.Count);
+                lines.Add(" ");
+            } 
 
             for (int i = 0; i < lines.Count; i++)
             {
                 int spaceCount = oneThirdOfLineSize - lines[i].Length;
-                lines[i] += new string('_', spaceCount);
+                lines[i] += new string(' ', spaceCount);
             }
-
 
             return lines;
         }
@@ -89,7 +87,5 @@ namespace POSPrinting
         {
             return lines.Count;
         }
-
-
     }
 }
