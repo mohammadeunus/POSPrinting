@@ -9,20 +9,23 @@ namespace POSPrinting
     internal class ReceiptPrinter
     {
         // Define class-level fields to store line size and comment data
-        private byte lineSize;
+        private byte lineSize = 48; //by default
+        private byte spaceBetweenColumn = 2; //by default
+
         private string comment;
         private List<string> lines = new List<string>();
         private int lineCount = 0;
 
         // Constructor for the ReceiptPrinter class, which takes in the line size and comment data
-        public ReceiptPrinter(byte lineSize, string comment)
-        {
-            this.lineSize = lineSize;
-            this.comment = comment;
-        }
         public ReceiptPrinter(string comment)
         { 
             this.comment = comment;
+        }
+
+        public void modify(byte lineSize, byte spaceBetweenColumn)
+        {
+            this.lineSize = lineSize;
+            this.spaceBetweenColumn = spaceBetweenColumn;
         }
 
 

@@ -11,7 +11,7 @@ namespace POSPrinting
         {
             for (int i = 0; i < LineCount; i++)
             {
-                Console.WriteLine($"{linesOfDate[i]}  {linesOfFoodName[i]}  {linesOfComment[i]}");
+                Console.WriteLine($"{linesOfDate[i]} {linesOfFoodName[i]} {linesOfComment[i]}");
             }
         }
 
@@ -19,14 +19,14 @@ namespace POSPrinting
         static void Main(string[] args)
         {
             // Get input data from the user
-            string foodName = "Pizza";
+            string foodName = "Pizza vaiaaaaaaaaaa";
             string comment = "This pizza was amazing! It was the perfect balance of cheese and sauce, and the crust was just the right amount of crispy.";
             string dateTime = DateTime.Now.ToString("hh:mm:ss tt");
             byte lineSize = 42;
             byte oneThirdOfLineSize = (byte)(lineSize / 3);
 
             // Create a new instance of the ReceiptPrinter class and call its methods to split and print the comment
-            ReceiptPrinter Rcomment = new ReceiptPrinter((byte)lineSize, comment);
+            ReceiptPrinter Rcomment = new ReceiptPrinter(comment);
             List<string> linesOfComment = Rcomment.SplitCommentIntoLines();
             int commentLineCount = Rcomment.LineSize();
 
