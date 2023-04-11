@@ -9,83 +9,29 @@ namespace POSPrinting
     internal class ReceiptPrinter
     {
         // Define class-level fields to store line size and comment data
-        private byte lineSize;
-        private string comment;
-        private List<string> lines = new List<string>();
-        private int lineCount = 0;
+        private byte charInEachLine { get; set; }
+        private byte spaceCountBetweenColumn { get; set; }
+        public string[] columnsBody { get; set; }
+        private List<string> lines { get; set; }
+        private int numberOfColumn { get; set; }
+
 
         // Constructor for the ReceiptPrinter class, which takes in the line size and comment data
-        public ReceiptPrinter(byte lineSize, string comment)
+        public ReceiptPrinter(params string[] columnsBody)
         {
-            this.lineSize = lineSize;
-            this.comment = comment;
-        }
-        public ReceiptPrinter(string comment)
-        { 
-            this.comment = comment;
-        }
+            this.columnsBody = columnsBody;
+            this.numberOfColumn =  columnsBody.Count<string>();
 
-
-        // Method to split the comment into lines that fit within the specified line size
-        public List<string> SplitCommentIntoLines()
+        }
+        internal void Modify(byte charInEachLine, byte spaceCountBetweenColumn)
         {
-            string[] commentArray = comment.Split(' ');
-
-            byte oneThirdOfLineSize = (byte)(lineSize / 3);
-
-
-            string currentLine = string.Empty;
-
-            for (int i = 0; i < commentArray.Length; i++)
-            {
-                if (currentLine.Length + commentArray[i].Length + 1 <= oneThirdOfLineSize)
-                {
-                    currentLine += commentArray[i] + " ";
-                }
-                else
-                {
-
-                    int spaceCount = oneThirdOfLineSize - currentLine.Length;
-                    currentLine += new string(' ', spaceCount);
-                    lines.Add(currentLine);
-
-                    currentLine = commentArray[i] + " ";
-                }
-            }
-            int spaceCount1 = oneThirdOfLineSize - currentLine.Length;
-            currentLine += new string(' ', spaceCount1);
-
-            lines.Add(currentLine.Trim());
-
-            lineCount = lines.Count;
-            
-            return lines;
-        }
- 
-
-        internal List<string> LineAdd(string sample, int oneThirdOfLineSize, int lineCount)
-        {
-            List<string> lines = new List<string>();
-
-            lines.Add(sample);
-
-            for (int i = 0; i < lineCount - 1; i++)
-            {
-                lines.Add(" ");
-            } 
-
-            for (int i = 0; i < lines.Count; i++)
-            {
-                int spaceCount = oneThirdOfLineSize - lines[i].Length;
-                lines[i] += new string(' ', spaceCount);
-            }
-
-            return lines;
+            this.charInEachLine= charInEachLine;
+            this.spaceCountBetweenColumn= spaceCountBetweenColumn;
         }
 
-        public int LineSize()
+        internal void PrintLines()
         {
-            return lines.Count;
+            Console.WriteLine(numberOfColumn);
         }
     }
 }

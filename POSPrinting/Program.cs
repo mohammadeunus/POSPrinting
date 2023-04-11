@@ -19,24 +19,17 @@ namespace POSPrinting
         static void Main(string[] args)
         {
             // Get input data from the user
-            string foodName = "Pizza";
-            string comment = "This pizza was amazing! It was the perfect balance of cheese and sauce, and the crust was just the right amount of crispy.";
+            string foodName = "HamburgerSandwich";
+            string comment = "This hamburger sandwich was delicious! Perfectly cooked patty, fresh toppings, and a soft bun made for a great balance of flavors and textures.";
             string dateTime = DateTime.Now.ToString("hh:mm:ss tt");
-            byte lineSize = 42;
-            byte oneThirdOfLineSize = (byte)(lineSize / 3);
+            byte CharInEachLine = 42;
+            byte spaceCountBetweenColumn = 2;
 
-            // Create a new instance of the ReceiptPrinter class and call its methods to split and print the comment
-            ReceiptPrinter Rcomment = new ReceiptPrinter((byte)lineSize, comment);
-            List<string> linesOfComment = Rcomment.SplitCommentIntoLines();
-            int commentLineCount = Rcomment.LineSize();
 
-            ReceiptPrinter OFoodName = new ReceiptPrinter(foodName);
-            List<string> linesOfFoodName =OFoodName.LineAdd(foodName,48/3, commentLineCount);
-
-            ReceiptPrinter ODate = new ReceiptPrinter(dateTime.ToString());
-            List<string> linesOfDate = OFoodName.LineAdd(dateTime.ToString(), 48 / 3, commentLineCount);
-
-            PrintLines(commentLineCount, linesOfFoodName, linesOfComment,linesOfDate);
+            // Create a new instance of the ReceiptPrinter class and ...
+            ReceiptPrinter ORestaurant = new ReceiptPrinter(foodName, comment, dateTime);
+            ORestaurant.Modify(CharInEachLine, spaceCountBetweenColumn);
+            ORestaurant.PrintLines();
 
         }
     }
