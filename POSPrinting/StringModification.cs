@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 namespace POSPrinting
 {
     internal class StringModification // helper class of ReceiptPrinter
-    {  
-        public StringModification(byte numberOfColumns, byte CharInEachLines) 
+    {
+        public StringModification(byte numberOfColumns, byte CharInEachLines)
         {
             this.numberOfColumns = numberOfColumns;
-            this.numberOfCharInEachColumn = (byte)(CharInEachLines/numberOfColumns);
+            this.numberOfCharInEachColumn = (byte)(CharInEachLines / numberOfColumns);
         }
 
         internal static int highestNumberOfLines { get; set; } = 0;
@@ -19,9 +19,11 @@ namespace POSPrinting
         private byte numberOfColumns { get; set; }
 
 
-        internal List<string> SplitCommentIntoLines(string ColumnsBody, byte CharInEachLine)
+        internal List<string> SplitIntoLines(string ColumnsBody, byte CharInEachLine)
         {
             string[] eachWordInColumnBody = ColumnsBody.Split(' ');
+            eachWordInColumnBody = CheckLongWord(eachWordInColumnBody);
+
             List<string> lineOfAColumn = new List<string>();
 
             string currentLine = string.Empty;
@@ -43,18 +45,37 @@ namespace POSPrinting
             {
                 highestNumberOfLines = lineOfAColumn.Count;
             }
+            lineOfAColumn.Add(currentLine.Trim());
 
             return lineOfAColumn;
+
+
         }
 
+        private string[] CheckLongWord(string[] eachWordInColumnBody)
+        {
+            for (int i = 0; i < eachWordInColumnBody.Length; i++)
+            { 
+                string t= eachWordInColumnBody[i];
+                string t1 = eachWordInColumnBody[i].Substring(0, eachWordInColumnBody[i].Length - eachWordInColumnBody[i].Length / 3);
+
+
+                if (eachWordInColumnBody[i].Length >= numberOfCharInEachColumn)
+                {
+                    string test = eachWordInColumnBody[i].Substring(0, eachWordInColumnBody[i].Length - numberOfCharInEachColumn / 3) + new string('.', (numberOfCharInEachColumn / 5));
+                    eachWordInColumnBody[i] = test;
+                }
+            }
+            return eachWordInColumnBody;
+        }
 
         internal void PaddingLinesSpaces(List<List<string>>? columnBodies)
         {
             string currentLine = string.Empty;
-            for (int i =0; i< numberOfColumns; i++ ) //numberOfColumns
+            for (int i = 0; i < numberOfColumns; i++) //numberOfColumns
             {
                 columnBodies[i] = addLines(columnBodies[i]);
-                
+
                 int spaceCount = numberOfCharInEachColumn - currentLine.Length;
                 currentLine += new string(' ', spaceCount);
 
@@ -64,7 +85,7 @@ namespace POSPrinting
             List<string> addLines(List<string> aColumnInList)
             {
                 int lineCount = highestNumberOfLines - aColumnInList.Count();
-                for(int i = 0;i < lineCount; i++)
+                for (int i = 0; i < lineCount; i++)
                 {
                     aColumnInList.Add("");
                 }
