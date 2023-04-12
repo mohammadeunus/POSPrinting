@@ -25,7 +25,8 @@ namespace POSPrinting
             StringModification OStringModification = new StringModification(numberOfColumn, charInEachColumn);
             for (int i = 0; i < numberOfColumn; i++)
             {
-                columnBodies.Add(OStringModification.SplitCommentIntoLines(columnsBody[i], charInEachLine));
+                List<string> lineOfAColumn = OStringModification.SplitCommentIntoLines(columnsBody[i], charInEachLine);
+                columnBodies.Add(lineOfAColumn);
             }
             OStringModification.PaddingLinesSpaces(columnBodies);
 
