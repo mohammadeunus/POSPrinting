@@ -10,9 +10,8 @@ namespace POSPrinting
     {
         // Define class-level fields to store line size and comment data
         private byte charInEachLine { get; set; } = 48;
-        public byte charInEachColumn { get; set; }
         private byte spaceCountBetweenColumn { get; set; } = 2;
-        public List<List<string>> columnBodies { get; set; }
+        public List<List<string>> columnBodies { get; set; } = new List<List<string>>();
         private byte numberOfColumn { get; set; }
 
 
@@ -20,13 +19,13 @@ namespace POSPrinting
         public MakeALine(params string[] columnsBody)
         {
             this.numberOfColumn = (byte)columnsBody.Count<string>();
-            charInEachColumn = (byte)(charInEachLine / numberOfColumn);
 
-            StringModification OStringModification = new StringModification(numberOfColumn, charInEachColumn);
+            StringModification OStringModification = new StringModification(numberOfColumn, charInEachLine);
             for (int i = 0; i < numberOfColumn; i++)
             {
-                List<string> lineOfAColumn = OStringModification.SplitCommentIntoLines(columnsBody[i], charInEachLine);
-                columnBodies.Add(lineOfAColumn);
+                string column = columnsBody[i];
+                List<string> aColumnBody = OStringModification.SplitIntoLines(column, charInEachLine);
+                columnBodies.Add(aColumnBody);
             }
             OStringModification.PaddingLinesSpaces(columnBodies);
 
@@ -51,9 +50,10 @@ namespace POSPrinting
                 string completeLine = "";
                 foreach (var column in columnBodies)
                 {
-                    completeLine = ($"{columnBodies[0][i]}{space}");
+                    completeLine += ($"{column[i]}{space}");
                 }
                 Console.WriteLine(completeLine.Trim());
+                completeLine = "";
             }
 
         }

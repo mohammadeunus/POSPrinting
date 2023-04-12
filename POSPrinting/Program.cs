@@ -13,6 +13,6 @@ byte spaceCountBetweenColumn = 1;
 
 
 // Create a new instance of the ReceiptPrinter class and ...
-MakeALine ORestaurant = new MakeALine(foodName, columnsBody, dateTime);
+MakeALine ORestaurant = new MakeALine(dateTime, foodName, columnsBody);
 ORestaurant.Modify(CharInEachLine, spaceCountBetweenColumn);
 ORestaurant.PrintLines();
