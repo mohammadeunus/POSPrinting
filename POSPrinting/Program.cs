@@ -5,7 +5,7 @@ using System.Text;
 using POSPrinting;
 
 // Get input data from the user
-string foodName = "HamburgerSandwich";
+string foodName = "HamburgerSandwich with big chicken";
 string columnsBody = "This hamburger sandwich was delicious! Perfectly cooked patty, fresh toppings, and a soft bun made for a great balance of flavors and textures.";
 string dateTime = DateTime.Now.ToString("hh:mm:ss tt");
 byte CharInEachLine = 42;

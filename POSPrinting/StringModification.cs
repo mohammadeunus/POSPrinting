@@ -69,17 +69,22 @@ namespace POSPrinting
             return eachWordInColumnBody;
         }
 
-        internal void PaddingLinesSpaces(List<List<string>>? columnBodies)
+        internal void PaddingLinesSpaces(List<List<string>> columnBodies)
         {
-            string currentLine = string.Empty;
             for (int i = 0; i < numberOfColumns; i++) //numberOfColumns
             {
-                columnBodies[i] = addLines(columnBodies[i]);
+                string currentLine = string.Empty;
+                List<string> d = columnBodies[i];
+                d = addLines(columnBodies[i]);
+                for (int j = 0; j < highestNumberOfLines; j++)
+                {
+                    currentLine = d[j];
+                    int spaceCount = numberOfCharInEachColumn - currentLine.Length;
+                    currentLine += new string('.', spaceCount);
 
-                int spaceCount = numberOfCharInEachColumn - currentLine.Length;
-                currentLine += new string(' ', spaceCount);
-
-                columnBodies[i].Add(currentLine.Trim());
+                    columnBodies[j].Add(currentLine.Trim());
+                }
+                
             }
 
             List<string> addLines(List<string> aColumnInList)
@@ -87,7 +92,7 @@ namespace POSPrinting
                 int lineCount = highestNumberOfLines - aColumnInList.Count();
                 for (int i = 0; i < lineCount; i++)
                 {
-                    aColumnInList.Add("");
+                    aColumnInList.Add(".");
                 }
                 return aColumnInList;
             }
