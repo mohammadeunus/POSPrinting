@@ -52,7 +52,7 @@ namespace POSPrinting
                 {
                     completeLine += ($"{column[i]}{space}");
                 }
-                Console.WriteLine(completeLine.Trim());
+                Console.WriteLine(completeLine);
                 completeLine = "";
             }
 

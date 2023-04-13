@@ -62,7 +62,7 @@ namespace POSPrinting
 
                 if (eachWordInColumnBody[i].Length >= numberOfCharInEachColumn)
                 {
-                    string test = eachWordInColumnBody[i].Substring(0, eachWordInColumnBody[i].Length - numberOfCharInEachColumn / 3) + new string('.', (numberOfCharInEachColumn / 5));
+                    string test = eachWordInColumnBody[i].Substring(0, numberOfCharInEachColumn - numberOfCharInEachColumn / 3) + new string('.', (numberOfCharInEachColumn / 5));
                     eachWordInColumnBody[i] = test;
                 }
             }
@@ -80,9 +80,9 @@ namespace POSPrinting
                 {
                     currentLine = d[j];
                     int spaceCount = numberOfCharInEachColumn - currentLine.Length;
-                    currentLine += new string('.', spaceCount);
+                    currentLine += new string(' ', spaceCount);
 
-                    columnBodies[j].Add(currentLine.Trim());
+                    d[j]= currentLine;
                 }
                 
             }
@@ -92,7 +92,7 @@ namespace POSPrinting
                 int lineCount = highestNumberOfLines - aColumnInList.Count();
                 for (int i = 0; i < lineCount; i++)
                 {
-                    aColumnInList.Add(".");
+                    aColumnInList.Add(" ");
                 }
                 return aColumnInList;
             }
